@@ -9,6 +9,7 @@ Syntax: `expression1 || expression2`.
 if expression1 can be evaluated to `true`, returns expression1; else, returns expression2.
 
 > It can use to provide default value. 
+> 
 > `const cfg = loaded || {};`
 
 ## Logical AND 
@@ -16,7 +17,7 @@ if expression1 can be evaluated to `true`, returns expression1; else, returns ex
 Syntax: `expression1 && expression2`.
 
 It evaluates operands from left to right.
-It returns immediately with value once it is evaluated to falsy.
+It returns immediately with value once it is evaluated to `falsy`.
 If all values are evaluated to `true`, the last operand is returned.
 
 ## See Also
