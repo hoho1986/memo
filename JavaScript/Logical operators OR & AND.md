@@ -4,9 +4,11 @@
 
 ## Logical OR 
 
-Syntax: `expression1 || expression2`.
+Syntax: `expression || expression`.
 
-if expression1 can be evaluated to `true`, returns expression1; else, returns expression2.
+It evaluates operands from left to right.
+It returns immediately with value once operand is evaluated to **truthy**.
+If all values are evaluated to **falsy**, the last operand is returned.
 
 > It can use to provide default value. 
 > 
@@ -14,11 +16,11 @@ if expression1 can be evaluated to `true`, returns expression1; else, returns ex
 
 ## Logical AND 
 
-Syntax: `expression1 && expression2`.
+Syntax: `expression && expression`.
 
 It evaluates operands from left to right.
-It returns immediately with value once it is evaluated to `falsy`.
-If all values are evaluated to `true`, the last operand is returned.
+It returns immediately with value once operand is evaluated to **falsy**.
+If all values are evaluated to **truthy**, the last operand is returned.
 
 ## See Also
 - [Nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
