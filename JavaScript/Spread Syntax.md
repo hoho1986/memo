@@ -21,7 +21,7 @@ testing(...arr); //log "PI", 3.14, 15
 testing.apply(null, arr); // same result as above.
 ```
 
-Use in \[\[Construct\]\]
+Use in `[[Construct]]`
 
 ```
 const xmas = new Date(...[2000, 12-1, 25]); // Function.prototype.apply() can not used for constructor.
@@ -120,7 +120,7 @@ console.log(merged2); // log {a: 'world', x: 42, y: 13 }
 > };
 > 
 > obj = Object.assign(obj, {y:0});
-> console.log(obj); //log 2 lines set y 0 and {x: 0, y: setter}
+> console.log(obj); // log 2 lines set y 0 and {x: 0, y: setter}
 > 
 > let spread = {...obj, y:0};
 > console.log(spread); // log {x: 0, y: 0}
