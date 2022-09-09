@@ -1,3 +1,3 @@
 # Memo 
 
-It is my note or study for programming languages.
+Notes or studies for programming languages.
