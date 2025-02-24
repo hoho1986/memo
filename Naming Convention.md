@@ -6,9 +6,9 @@ Multiple-word Formats:
 - camelCase: twoWords
 - PascalCase, UpperCamelCase: TwoWords
 - snake_case: two_words
-- MACRO_CASE, CONSTANT_CASE, SCREAMING_SNAKE_CASE, ALL_CAPS: two_words
-- camel_Snake_Case: two_words
-- Pascal_Snake_Case, Title_Case: two_words
+- MACRO_CASE, CONSTANT_CASE, SCREAMING_SNAKE_CASE, ALL_CAPS: TWO_WORDS
+- camel_Snake_Case: two_Words
+- Pascal_Snake_Case, Title_Case: Two_Words
 - kebab-case, dash-case, lisp-case, spinal-case: two-words
 - TRAIN-CASE, COBOL-CASE, SCREAMING-KEBAB-CASE: TWO-WORDS
 - Train-Case, HTTP-Header-Case: Two-Words
