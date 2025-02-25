@@ -15,15 +15,16 @@ It is used for asynchronous operation and contains states:
 
 Example:
 ```
-const promise = new Promise((resolve, reject) => {
+const promise = (()=>new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve("foo"); // or reject(new Error("Failed"));
   }, 3000);
-});
+}))();
 ```
 
 `Promise.withResolvers()` returns a plain object containing properties `promise`, `resolve` and `reject`.
 
+Example:
 ```
 const promise = (()=>{
   let {promise, resolve, reject} = Promise.withResolvers();
