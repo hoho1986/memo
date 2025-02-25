@@ -2,10 +2,10 @@
 
 ## Async function
 - instance of `AsyncFunction`
+- contains zero or more `await` expressions.
 - returns a new Promise instance
   - resolved with the value returned by the async function
   - rejected with uncaught exception within the async function
-- contains zero or more `await` expressions.
 
 ## Operator `await`
 - returns 
