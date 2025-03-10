@@ -56,7 +56,7 @@ The following static methods accept iterable of promises and return a `Promise`.
 - `Promise.all()`: Fulfilled only all of the promises are fulfilled; rejected once any of the promises rejected.
 - `Promise.allSettled()`: Fulfilled when all promises are completed regardless fulfilled or rejected. Fulfilled value is array of object with property `status` either `"fulfilled"` or `"rejected"` and `value` for fulfilled or `reason` for rejected.
 - `Promise.any()`: Fulfilled once any of the promises is fulfilled and rejected when all of the promises are rejected. Fulfilled value takes the first fulfilled.
-- `Promise.race()`: Fulfilled or rejected is depended on the state of the first of the promises is completed regardless fulfilled or rejected.
+- `Promise.race()`: Fulfilled or rejected is depended on the state of the first of the promises is completed with fulfilled or rejected.
 
 > Use Cases:
 > `Promise.any()`: Resources from difference CDN and use the fast.
