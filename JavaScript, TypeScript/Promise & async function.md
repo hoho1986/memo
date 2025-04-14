@@ -12,6 +12,8 @@ It is used for asynchronous operation and contains states:
 > - alreadly fulfilled if the function returns a value.
 > - already rejected if the function throws an error.
 > - asynchronously fulfilled or rejected if the function return a `Promise`.
+> 
+> It is helper function that determine resolve or reject by the function passed in.
 
 Example:
 ```
