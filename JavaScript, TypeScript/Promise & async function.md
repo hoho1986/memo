@@ -38,9 +38,19 @@ const promise = (()=>{
 ```
 
 Methods are used for handling operation completed regardless fulfilled or rejected.
-- `then()`: accept callbacks for fulfilled and rejected.
-- `catch()`: accept callback for rejected. Shortcut for `then(undefined, onRejected)`.
-- `finally()` accept callback for operation completed regardless fulfilled or rejected.
+- `then()`: 
+  - accepts callbacks for fulfilled and optional rejected.
+  - returns a new `Promise` (notated as p) which is affected by one of the callback functions. If the callback function:
+    - throws an error, p is rejected with the error.
+    - returns a value, p is fulfilled with the returned value.
+    - retruns nothing, p is fulfilled with `undefined`.
+    - returns already fulfilled promise, p is fulfilled with value of the fulfilled promise.
+    - returns already rejected promise, p is rejected with value of the rejected promise.
+    - returns pending promise, p is pending and becomes fulfilled/rejected with the value of the pending promise immediately once the pending promise is fulfilled/rejected.
+- `catch()`: accepts callback for rejected. Shortcut for `then(undefined, onRejected)`.
+- `finally()`: 
+   - accepts callback for operation completed regardless fulfilled or rejected.
+   - returns new `Promise` with same state of the promise that called `finally` or rejected if an error is thrown within callback function.
 
 Example:
 ```

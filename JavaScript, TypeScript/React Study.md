@@ -92,15 +92,103 @@ Spread syntax (`...`) can be used on:
   - Can use multiple times. e.g. `func(para1, ...iterableObj, ...iterableObj)`
   - Can be used on constructor with `new`. 
 - Array literal. e.g. `[1, ...iterableObj, '4', 'five', 6]`
+  - Shallow copy an array. `const a = [1,2,3]; const b = [...a]; // [1,2,3]`
+  - Can use multiple times. e.g. `const a = [1]; const b = [3, ...a, 4, ...a, 5, 9]; //[3,1,4,1,5,9]`
+  - Adding elements to an array conditionally with ternary operator. e.g. `const a = [3, ...(cond?[4]:[])]; // added if evaluated as true`
+  - Alternative to `Array.prototype.push()`, `Array.prototype.unshift()`, `Array.prototype.concat()`
 - Object literal. e.g. `{key1: 'value', ...obj, key2: 'value'}`
+  - Shallow copy an object. (without non-enumerable properties and do not copy the prototype). e.g. `const cloned = {...object};`
+  - Merging objects and override the value with the latest assignment if property name is repeated. 
+    e.g. `const a = {x:3, y:4}; const b = {y:5, z:6}; const c = {...a, ...b}; // c = {x:3, y:5, z:6}`
+  - Adding properties to an object conditionally with ternary operator. 
+    e.g. `const o = {a:1,b:2, ...(cond?{c:3}:{});}; // added if evaluated as true`
+  - Difference with [`Object.assign()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+    - Spread syntax can not mutate an object, whereas `Object.assign()` can.
+    - Spread syntax can not triggers setters, whereas `Object.assign()` can.
 
-TODO
+> Shallow copy is copied value share same reference with be copied.
+>
+> Deep copy is opposite that copied value is difference with be copied.
+
+> Because all falsy values do not have any enumerable properties, simplify it by using logical AND operator instead of ternary operator. 
+> e.g. `const o = {a:1,b:2,...(cond && {c:3})};`
 
 [Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 
 ### Modules
 
-TODO
+Modules features are exported by `export` declaration and the features are able to used by `import` declaration or `import()`.
+
+> Implementations before standardized.
+> - `CommonJS`: Used by `Node.js`.
+> - `Asynchronous Module Definition (AMD)`: Used by `RequireJS`.
+
+Types of export:
+- Named export: 
+  - Multiple export: identifiers are going to export in curly bracket. 
+    The identifiers are variable name, constant name, function name and even class name.
+    To avoid naming conflicts, rename for exporting is done by keyword `as`. Beside a new identifier, string literal is also accepted.
+    e.g. `export { name1, name2 as rename, name3 as "string name"};`
+  - Single export by `export <declaration>`. 
+    The declaration is one of `let`, `const`, `var`, function and class declarations. e.g. `export const name1 = 1, name2 = 2;`
+    Destructure assignment can be used. e.g. `export const [ name1, name2 ] = array;`
+- Default export by:
+  - Expression. e.g. `export default <expression>`
+  - Function or class declaration. e.g. `export default <the declaration>`
+  - Use keyword `default` on rename identifier. e.g. `export {myFunc as default}`
+- Re-exporting: 
+  - One by one. e.g.`export { default as function1, function2 } from "./bar.js";`
+  - All named (default not included). e.g. `export * as ns from "./bar.js"; //ns is an object including all named export`
+
+> Export declarations are not subject to temporal dead zone rules. It can be used on export declarations before it is declared.
+
+Types of static import declaration:
+- Named import: e.g.`import { name1, name2, ...nameN } from "module-specifier";`
+- Default import: e.g. `import defaultExport from "module-specifier";`
+- Namespace import: `import * as name from "module-name"`; name is a module namespace object 
+- Side effect import: It can be used by polyfills. e.g.`import "module-specifier";`
+
+> Import declarations are hoisted.
+> Imported values are read only. Error if assign a value to those. However, it'll be updated if those value are updated by module (exporter).
+
+Type of module specifier:
+- Relative: Started with `/`, `./` or `../` and resolution is dependent on URL of current module.
+- Absolute: Parsable URL.
+- Bare: Not one of the above.
+
+How module specifier are interpreted depends on the host environment. 
+E.g. Browser follows HTTP specification.
+In general, you should not omit file extension on browser, even though it is valid, because it usually represent requesting a HTML.
+The data scheme is supported but the file scheme is blocked on browsers due to security issues.
+For bare specifier, it usually represent requesting libraries but you may use it on browsers by defining [`importmap`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap).
+
+> You can get the resolution of module specifier programmatically via [`import.meta.resolve()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve).
+
+Module namespace object is a sealed object that describes all exports from a module and is created after evaluated. 
+
+> Sealed object makes existing properties non-configurable and prevents extensions. So it has a fixed set of properties: 
+> - New properties cannot be added. [`Object.preventExtensions()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
+> - Existing properties cannot be removed.
+> - `[[Prototype]]` cannot be re-assigned. (Due to effect of `Object.preventExtensions()`)
+> - Enumerability and configurability cannot be changed.
+> - Value of existing properties can still be changed.
+>
+> Unlike sealed object, freezed object is more strict that make existing properties non-writable and non-configurable and prevent extensions.
+> Beside the restriction of sealed object, freezed object is more strict that value of existing properties cannot be changed.
+
+Dynamic import `import()`
+- can load modules asynchronously and dynamically into a potentially non-module environment.
+- only be evaluated when needed.
+- returns a promise. The promise is fulfilled if it is loaded and evaluated successfully and rejected in otherwise. The fulfilled value is a Module namespace object.
+
+> The same module namespace object will be returned either imported by static import declaration or dynamic import.
+> ```
+> import * as mod from "/my-module.js";
+> import("/my-module.js").then(mod2=>console.log (mod === mod2)); // true
+> ```
+> If there is a export function called `then()`, it causes difference behaviour for static import declaration and dynamic import.
+
+TODO https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with
 
 [Reference: export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
 [Reference: import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
