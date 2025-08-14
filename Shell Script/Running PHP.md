@@ -35,9 +35,9 @@ For redirection and pipeline.
 Command Prompt Batch File
 ```
 @ECHO OFF
-REM RUN Php program
-::RUN Php program
-SET "$PHPBIN=C:\php-8.3.13\php.exe"
+REM RUN PHP program
+::RUN PHP program
+SET "$PHP_BIN=C:\php-8.3.13\php.exe"
 SET "$ENTRY=%~dp0entry.php"
 %$PHP_BIN% %$ENTRY% %*
 ```
