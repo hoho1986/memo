@@ -59,6 +59,7 @@ class CustomAttribute {
 
 Example
 ```
+<?php
 #[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_FUNCTION)]
 class AttrMethod {
     public function __construct(
@@ -102,6 +103,7 @@ List of classes that have `getAttributes()` method
 
 Example
 ```
+<?php
 #[FooAttribute]
 class Foo {
     #[ConstAttr]
@@ -133,6 +135,58 @@ echo $objRefAttr->newInstance()->uid; // Fail to initialize
 
 // https://www.php.net/manual/en/reflectionclass.getattributes.php
 
+```
+
+```
+<?php
+interface Color {}
+#[Attribute]
+class Red implements Color {}
+#[Attribute]
+class Yellow implements Color {}
+#[Attribute]
+class Green implements Color {}
+
+#[Red]
+#[Green]
+class Sample{}
+
+$rc = new ReflectionClass(Sample::class);
+$attr1 = $rc->getAttributes(Red::class);
+var_dump($attr1);
+/*
+array(1) {
+  [0]=>
+  object(ReflectionAttribute)#2 (1) {
+    ["name"]=>
+    string(3) "Red"
+  }
+}
+*/
+
+$attr2 = $rc->getAttributes(Color::class);
+var_dump($attr2);
+/*
+array(0) {
+}
+*/
+
+$attr3 = $rc->getAttributes(Color::class, ReflectionAttribute::IS_INSTANCEOF);
+var_dump($attr3);
+/*
+array(2) {
+  [0]=>
+  object(ReflectionAttribute)#3 (1) {
+    ["name"]=>
+    string(3) "Red"
+  }
+  [1]=>
+  object(ReflectionAttribute)#4 (1) {
+    ["name"]=>
+    string(5) "Green"
+  }
+}
+*/
 ```
 
 ## Built-in Attributes
