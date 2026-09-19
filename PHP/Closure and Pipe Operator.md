@@ -62,7 +62,7 @@ $result = trim($result);
 ## Limitation and Notice
 
 Callable
-- MUST ONLY have a compulsory parameter which MUST NOT by-reference and follow by any number of optional parameters.
+- MUST ONLY have a compulsory parameter which MUST NOT by-reference and may follow by any number of optional parameters.
 - have a return value 
   - return type `void` will be coerced to `null`.
   - if `strict_types` is declared, data type of the return value must be matched with next callable
