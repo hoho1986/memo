@@ -11,4 +11,4 @@ It is also apply to `boolval()`.
 - (null) NULL (including unset variables)
 - (SimpleXML) attributeless empty elements which have neither children nor attributes.
 
-Every other value is considered TRUE.
+All other values ​​are considered **TRUE**.
