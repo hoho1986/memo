@@ -20,8 +20,8 @@ Callable is
     - `$object`
  
 > Closure vs Callable
-> Closure scope is bound when instance is created.
-> Callable scope is resolved when it is called.
+> - Closure scope is bound when instance is created.
+> - Callable scope is resolved when it is called.
 
 ```
 <?php
